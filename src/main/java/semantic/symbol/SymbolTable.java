@@ -177,20 +177,20 @@ public class SymbolTable {
 
         public void addParameter(String parameterName) {
             parameters.put(parameterName, new Symbol(lastType, getterMemory().getDateAddress()));
+            orderdParameters.add(parameterName);
         }
 
         private void reset() {
             index = 0;
         }
 
-        private Symbol getNextParameter() {
-            Symbol nextParam = parameters.get(orderdParameters.get(index));
-            increaseIndex();
-            return nextParam;
+        private Symbol getCurrentParamIndex(){
+            return parameters.get(orderdParameters.get(index));
         }
-
-        private void increaseIndex() {
+        private Symbol getNextParameter() {
+            Symbol nextParam = getCurrentParamIndex();
             index++;
+            return nextParam;
         }
     }
 }
