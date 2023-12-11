@@ -147,9 +147,7 @@ public class CodeGenerator {
         symbolStack.push(methodName);
     }
 
-    //    public void spid(Token next){
-//        symbolStack.push(next.value);
-//    }
+
     public void checkID() {
         symbolStack.pop();
         if (ss.peek().varType == varType.Non) {
@@ -275,7 +273,6 @@ public class CodeGenerator {
             }
             memory.add3AddressCode(Operation.ASSIGN, param, new Address(s.address, t), null);
 
-//        symbolStack.push(className);
 
         } catch (IndexOutOfBoundsException e) {
             ErrorHandler.printError("Too many arguments pass for method");
