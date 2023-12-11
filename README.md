@@ -1,6 +1,8 @@
 # SE_LAB_6
 <h2>Implementation Instructions</h2>
+<p>
 لطفا برای اجرای برنامه، پروژه را از برنچ master گرفته و سپس اجرا کنید.
+</p>
 <h2>Implementation details</h2>
 <h3>Facade Design Pattern</h3>
 Facade is a structural design pattern that provides a simplified interface to a library, a framework, or any other complex set of classes. We have detected two parts of the code that could be refactored to use this pattern:
