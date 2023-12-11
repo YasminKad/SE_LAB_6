@@ -17,17 +17,18 @@ public class SymbolTable {
     private SymbolType lastType;
 
     public SymbolTable(Memory memory) {
-    setterMemory(memory);
-    klasses = new HashMap<>();
-    keyWords = new HashMap<>();
-    keyWords.put("true", new Address(1, varType.Bool, TypeAddress.Imidiate));
-    keyWords.put("false", new Address(0, varType.Bool, TypeAddress.Imidiate));
+        setterMemory(memory);
+        klasses = new HashMap<>();
+        keyWords = new HashMap<>();
+        keyWords.put("true", new Address(1, varType.Bool, TypeAddress.Imidiate));
+        keyWords.put("false", new Address(0, varType.Bool, TypeAddress.Imidiate));
     }
-    private Memory getterMemory(){
+
+    private Memory getterMemory() {
         return mem;
     }
 
-    private void setterMemory(Memory mem){
+    private void setterMemory(Memory mem) {
         this.mem = mem;
     }
 
@@ -43,9 +44,8 @@ public class SymbolTable {
     }
 
     public void addField(String fieldName, String className) {
-        klasses.get(className).Fields.put(fieldName, new Symbol(lastType, mem.getDateAddress()));
+        klasses.get(className).Fields.put(fieldName, new Symbol(lastType, getterMemory().getDateAddress()));
     }
-    klasses.get(className).Fields.put(fieldName, new Symbol(lastType, getterMemory().getDateAddress()));
 
     public void addMethod(String className, String methodName, int address) {
         if (klasses.get(className).Methodes.containsKey(methodName)) {
@@ -55,14 +55,15 @@ public class SymbolTable {
     }
 
     public void addMethodParameter(String className, String methodName, String parameterName) {
-        klasses.get(className).Methodes.get(methodName).localVariable.put(localVariableName, new Symbol(lastType, getterMemory().getDateAddress()));    }
+        klasses.get(className).Methodes.get(methodName).addParameter(parameterName);
+    }
 
     public void addMethodLocalVariable(String className, String methodName, String localVariableName) {
 //        try {
         if (klasses.get(className).Methodes.get(methodName).localVariable.containsKey(localVariableName)) {
             ErrorHandler.printError("This variable already defined");
         }
-        klasses.get(className).Methodes.get(methodName).localVariable.put(localVariableName, new Symbol(lastType, mem.getDateAddress()));
+        klasses.get(className).Methodes.get(methodName).localVariable.put(localVariableName, new Symbol(lastType, getterMemory().getDateAddress()));
 //        }catch (NullPointerException e){
 //            e.printStackTrace();
 //        }
@@ -187,6 +188,9 @@ public class SymbolTable {
             increaseIndex();
             return nextParam;
         }
-        private void increaseIndex(){
+
+        private void increaseIndex() {
             index++;
         }
+    }
+}
