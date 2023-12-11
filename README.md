@@ -15,6 +15,16 @@ One of the most common signs of refactoring using polymorphism is multiple switc
 
 <h3>Separate Query From Modifier:</h3>
 This factoring technique implements Command and Query Responsibility Segregation. This principle tells us to separate code responsible for getting data from code that changes something inside an object. One of the bad smells detected in the code according to this pattern was in the SymbolTable class in the getNextParameter function, where the previous parameter value is fetched and the next parameter is revised in the same function. To better this process, we have added another function getCurrentParamIndex to separate the Query from Modifier. 
+
+<h3>Self Encapsulated Field</h3>
+In this refactoring method and this part of refactoring the minijava project, we define the class properties as private and call them as private classes too. We use Getter and Setter methods to ensure that all operations on properties are done through methods instead of accessing the properties we have directly. We added getter and setter named getterMemory and setterMemory to the symbolTable class.
+
+<h3>Remove Assignments to Parameters</h3>
+The refactoring method is used to remove value assignment operations to parameters in the functions we have in the code. This refactoring will help you improve the piece of code that assigns values to parameters and make them more readable and modifiable. In the ParseTable.java file, instead of having to change the input of the function, which is jsonTable, we define a local variable and use the variable we created from now on in the code.
+
+<h3>Extract Method</h3>
+The last refactoring rule we used for this project is used to turn a part of repetitive code into a separate method to execute that part of the code. This refactoring trick helps developers to remove repetitive code to a separate method and use that method in different places of the program if needed so they would get rid of the duplicated parts of the code that already exists. In the codegenarator class, a piece of code was repeated 3 times, so instead of repeating it, we created a function and called the function whenever we needed that specific piece of code to execute.
+
 # سوالات تشریحی
 <h2>
   سوال ۱
