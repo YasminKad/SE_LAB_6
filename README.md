@@ -1,31 +1,20 @@
 # SE_LAB_6
-Implementation details
-Facade Design Pattern:
+<h2>Implementation details</h2>
+<h3>Facade Design Pattern:</h3>
 Facade is a structural design pattern that provides a simplified interface to a library, a framework, or any other complex set of classes. We have detected two parts of the code that could be refactored to use this pattern:
 
-CodeGeneratorFacade
+<h3>CodeGeneratorFacade</h3>
 Before the refactoring, the Parser class was directly using the functionalities of the codeGenerator class. When refactored, we added a Facade for the CodeGenerator so that the Parser would only use the available functionality defined in the CodeGeneratorFacade class and so this way we limited and simplified the interface available. At last we also modified the usages to adapt the code with the refactor action taken.
 
-ScannerFacade
+<h3>ScannerFacade</h3>
 Before the refactoring, the Parser class was directly using the functionalities of the lexicalAnalyzer. When refactored, we added a Facade for the scanner so that the Parser would only use the available functionality defined in the ScannerFacade class and so this way we limited and simplified the interface available. At last we also modified the usages to adapt the code with the refactor action taken.
 
-
-
-
-
-
-Polymorphism:
+<h3>Polymorphism:</h3>
 In programming languages and type theory, polymorphism is the provision of a single interface to entities of different types, or the use of a single symbol to represent multiple different types.
 One of the most common signs of refactoring using polymorphism is multiple switch case scenarios. Due to this explanation, we detected this antipattern in the Action class and so we refactored it. In this process, we created a unique class for each and every switch case available for the actions; we created the shift, accept, reduce class and moved all these action related functionalities to an actions package. At last we also modified the usages to adapt the code with the refactor action taken.
 
-
-
-
-
-Separate Query From Modifier:
+<h3>Separate Query From Modifier:</h3>
 This factoring technique implements Command and Query Responsibility Segregation. This principle tells us to separate code responsible for getting data from code that changes something inside an object. One of the bad smells detected in the code according to this pattern was in the SymbolTable class in the getNextParameter function, where the previous parameter value is fetched and the next parameter is revised in the same function. To better this process, we have added another function getCurrentParamIndex to separate the Query from Modifier. 
-
-
 # سوالات تشریحی
 <h2>
   سوال ۱
