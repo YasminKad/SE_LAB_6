@@ -12,7 +12,7 @@ import java.util.Stack;
 /**
  * Created by Alireza on 6/27/2015.
  */
-public class CodeGenerator {
+class CodeGenerator {
     private Memory memory = new Memory();
     private Stack<Address> ss = new Stack<Address>();
     private Stack<String> symbolStack = new Stack<>();
@@ -154,27 +154,27 @@ public class CodeGenerator {
             //TODO : error
         }
     }
+    public varType varTypes(Symbol s){
+        varType t = varType.Int;
+        switch (s.type) {
+            case Bool:
+                t = varType.Bool;
+                break;
+            case Int:
+                t = varType.Int;
+                break;
+        } return t;
+    }
 
     public void pid(Token next) {
         if (symbolStack.size() > 1) {
             String methodName = symbolStack.pop();
             String className = symbolStack.pop();
             try {
-
                 Symbol s = symbolTable.get(className, methodName, next.value);
-                varType t = varType.Int;
-                switch (s.type) {
-                    case Bool:
-                        t = varType.Bool;
-                        break;
-                    case Int:
-                        t = varType.Int;
-                        break;
-                }
-                ss.push(new Address(s.address, t));
-
-
-            } catch (Exception e) {
+                ss.push(new Address(s.address, varTypes(s)));
+            }
+            catch (Exception e) {
                 ss.push(new Address(0, varType.Non));
             }
             symbolStack.push(className);
@@ -190,17 +190,7 @@ public class CodeGenerator {
         ss.pop();
 
         Symbol s = symbolTable.get(symbolStack.pop(), symbolStack.pop());
-        varType t = varType.Int;
-        switch (s.type) {
-            case Bool:
-                t = varType.Bool;
-                break;
-            case Int:
-                t = varType.Int;
-                break;
-        }
-        ss.push(new Address(s.address, t));
-
+        ss.push(new Address(s.address, varTypes(s)));
     }
 
     public void kpid(Token next) {
@@ -258,15 +248,7 @@ public class CodeGenerator {
 //        String className = symbolStack.pop();
         try {
             Symbol s = symbolTable.getNextParam(callStack.peek(), methodName);
-            varType t = varType.Int;
-            switch (s.type) {
-                case Bool:
-                    t = varType.Bool;
-                    break;
-                case Int:
-                    t = varType.Int;
-                    break;
-            }
+            varType t = varTypes(s)
             Address param = ss.pop();
             if (param.varType != t) {
                 ErrorHandler.printError("The argument type isn't match");
