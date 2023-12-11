@@ -9,8 +9,11 @@ import java.util.Stack;
 import Log.Log;
 import codeGenerator.CodeGeneratorFacade;
 import errorHandler.ErrorHandler;
+import parser.actions.Action;
 import scanner.ScannerFacade;
 import scanner.token.Token;
+
+import static parser.actions.act.accept;
 
 public class Parser {
     private ArrayList<Rule> rules;
